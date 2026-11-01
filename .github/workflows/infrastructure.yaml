@@ -9,6 +9,7 @@ on:
 
     paths:
     - terraform/**
+    - .github/workflows/infrastructure.yaml
 
 permissions:
   id-token: write

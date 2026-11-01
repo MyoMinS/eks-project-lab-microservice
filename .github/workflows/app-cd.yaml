@@ -190,8 +190,8 @@ jobs:
     - name: setting up gitHub then creating git commit and pushing it to gitHub
       id: manifest_commit
       run: |
-          git config --global user.email "zakariya.a4458@gmail.com"
-          git config --global user.name "zakariyaa4458"
+          git config --global user.email "myominsoe432@gmail.com"
+          git config --global user.name "MyoMinS"
           git add kubernetes/
           git commit -m "new commits for updated manifests"
           echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
@@ -241,8 +241,8 @@ jobs:
     - name: Configure Git
       if: steps.rollout.outcome == 'failure'
       run: |
-          git config user.email "zakariya.a4458@gmail.com"
-          git config user.name "zakariyaa4458"
+          git config user.email "myominsoe432@gmail.com"
+          git config user.name "MyoMinS"
 
     - name: Rollback failed deployment
       if: steps.rollout.outcome == 'failure'
