@@ -38,20 +38,20 @@ variable "region" {
 
 #}
 
-variable "aws_key_arn" {
-  type = string
+#variable "aws_key_arn" {
+#  type = string
+#
+#}
 
-}
+#variable "aws_key_ecr_arn" {
+#  type = string
+#
+#}
 
-variable "aws_key_ecr_arn" {
-  type = string
-
-}
-
-variable "cloudwatch_key_arn" {
-  type = string
-
-}
+#variable "cloudwatch_key_arn" {
+#  type = string
+#
+#}
 
 variable "aws_account_id" {
   type = string
