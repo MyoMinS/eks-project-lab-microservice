@@ -114,10 +114,9 @@ resource "aws_cloudwatch_log_group" "flow_log_group" {
   name = "flow-log-cloudwatch-group"
   #arn = "arn:aws:logs:${var.region}:${var.aws_account_id}:log-group:flow-log-cloudwatch-group"
 
-  
-  
   #kms_key_id = var.cloudwatch_key_arn
   retention_in_days = "365"
+  region = var.region
 
   tags = {
     Environment = "production"
