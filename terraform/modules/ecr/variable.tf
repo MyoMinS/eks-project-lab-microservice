@@ -7,11 +7,11 @@ variable "app_ecr_repo" {
 
 variable "region" {
   type    = string
-  default = "eu-west-2"
+  default = "ap-southeast-1"
 
 }
 
-variable "aws_key_ecr_arn" {
-  type = string
-  
-}
+#variable "aws_key_ecr_arn" {
+#  type = string
+#  
+#}

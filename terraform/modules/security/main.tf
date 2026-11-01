@@ -116,7 +116,7 @@ resource "aws_cloudwatch_log_group" "flow_log_group" {
 
   
   
-  kms_key_id = var.cloudwatch_key_arn
+  #kms_key_id = var.cloudwatch_key_arn
   retention_in_days = "365"
 
   tags = {

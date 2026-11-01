@@ -9,7 +9,7 @@ module "eks" {
   aws_iam_role_policy_attachment_eks_cluster_policy = module.iam.aws_iam_role_policy_attachment_eks_cluster_policy.id
   aws_iam_role_eks_role                             = module.iam.aws_iam_role_eks_role.id
   aws_iam_role_node_group_role                      = module.iam.aws_iam_role_node_group_role.id
-  aws_key_arn                                       = var.aws_key_arn
+  #aws_key_arn                                       = var.aws_key_arn
   #ip_address                                        = var.ip_address
   aws_account_id                   = var.aws_account_id
   eks_role_arn                     = var.eks_role_arn
@@ -21,7 +21,7 @@ module "ecr" {
   #checkov:skip=CKV_AWS_1: these are local modules
   source          = "./modules/ecr"
   app_ecr_repo    = var.app_ecr_repo
-  aws_key_ecr_arn = var.aws_key_ecr_arn
+  #aws_key_ecr_arn = var.aws_key_ecr_arn
 }
 
 module "helm" {
@@ -73,7 +73,7 @@ module "security" {
   aws_vpc_id_cidr_block               = module.networking.aws_vpc_id_cidr_block
   aws_iam_role_policy_flow_log_policy = module.iam.aws_iam_role_policy_flow_log_policy.id
   aws_iam_role_flow_log_role          = module.iam.aws_iam_role_flow_log_role.id
-  cloudwatch_key_arn                  = var.cloudwatch_key_arn
+  #cloudwatch_key_arn                  = var.cloudwatch_key_arn
   aws_account_id                      = var.aws_account_id
   flow_log_role_arn                   = var.flow_log_role_arn
   database_url                        = var.database_url

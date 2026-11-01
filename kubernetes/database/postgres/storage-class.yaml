@@ -13,6 +13,6 @@ allowedTopologies:
 - matchLabelExpressions:
   - key: topology.ebs.csi.aws.com/zone
     values:
-    - eu-west-2a
-    - eu-west-2b
-    - eu-west-2c
+    - ap-southeast-1a
+    - ap-southeast-1b
+    - ap-southeast-1c

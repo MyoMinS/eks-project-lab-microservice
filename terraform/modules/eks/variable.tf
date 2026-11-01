@@ -1,6 +1,6 @@
 variable "region" {
   type    = string
-  default = "eu-west-2"
+  default = "ap-southeast-1"
 
 }
 
@@ -46,10 +46,10 @@ variable "ip_address" {
   
 }
 
-variable "aws_key_arn"{
-    type = string
-    
-}
+#variable "aws_key_arn"{
+#    type = string
+#    
+#}
 
 variable "aws_account_id" {
     type = string

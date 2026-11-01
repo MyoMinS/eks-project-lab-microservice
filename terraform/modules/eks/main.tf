@@ -6,15 +6,15 @@ resource "aws_eks_cluster" "eks-cluster" {
   role_arn = var.eks_role_arn
   version  = "1.35"
 
-  enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+  #enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 
-  encryption_config {
-    provider {
-   key_arn = var.aws_key_arn
-    }
-
-    resources = ["secrets"]
-  }
+  #encryption_config {
+  #  provider {
+  # key_arn = var.aws_key_arn
+  #  }
+#
+  #  resources = ["secrets"]
+  #}
 
   access_config {
     authentication_mode = "API_AND_CONFIG_MAP"
@@ -61,9 +61,9 @@ resource "aws_eks_node_group" "eks-node-group" {
   ]
 
   scaling_config {
-    desired_size = 5
+    desired_size = 2
     max_size     = 5
-    min_size     = 5
+    min_size     = 2
   }
 
   update_config {

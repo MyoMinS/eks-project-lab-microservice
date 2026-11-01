@@ -47,10 +47,6 @@ resource "helm_release" "external_dns" {
   namespace        = "external-dns"
   create_namespace = true
 
-
-
-
-
   values = [
     <<-EOT
       installCRDs: true
