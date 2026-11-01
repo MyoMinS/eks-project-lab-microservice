@@ -12,8 +12,8 @@ resource "aws_vpc" "main" {
 
 resource "aws_default_security_group" "default" {
   vpc_id = aws_vpc.main.id
+  depends_on = [aws_vpc.main]
 
-  
 }
 
 resource "aws_subnet" "private-subnet" {
