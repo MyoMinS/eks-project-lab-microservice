@@ -74,11 +74,11 @@ jobs:
         - name: terraform-validate
           run: terraform validate
 
-        - name: Check live Traefik state
-          run: |
-                aws eks update-kubeconfig --region ap-southeast-1 --name eks-cluster
-                kubectl get svc -n traefik || true
-                helm status traefik -n traefik || true
+        #- name: Check live Traefik state
+        #  run: |
+        #        aws eks update-kubeconfig --region ap-southeast-1 --name eks-cluster
+        #        kubectl get svc -n traefik || true
+        #        helm status traefik -n traefik || true
 
         - name: Reinitialize Terraform backend
           run: |
