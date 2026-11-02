@@ -23,6 +23,10 @@ module "karpenter" {
  
 
   cluster_name = var.aws_eks_cluster
+
+  # Use inline IAM policy instead of managed IAM policy
+  enable_inline_policy = true
+  
 # Additional permissions for Karpenter Controller IAM Role
   iam_policy_statements = [
     {
