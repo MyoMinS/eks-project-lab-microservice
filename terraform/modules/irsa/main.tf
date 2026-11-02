@@ -23,7 +23,19 @@ module "karpenter" {
  
 
   cluster_name = var.aws_eks_cluster
+# Additional permissions for Karpenter Controller IAM Role
+  iam_policy_statements = [
+    {
+      sid    = "AllowDescribeInstanceTypes"
+      effect = "Allow"
 
+      actions = [
+        "ec2:DescribeInstanceTypes"
+      ]
+
+      resources = ["*"]
+    }
+  ]
   # Attach additional IAM policies to the Karpenter node IAM role
   node_iam_role_additional_policies = {
     AmazonSSMManagedInstanceCore = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
@@ -129,8 +141,8 @@ resource "aws_iam_role" "worker_iam_role" {
 
         Condition = {
           StringEquals = {
-        "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:sub" = "system:serviceaccount:application-namespace:worker-service-account"
-        "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:aud" = "sts.amazonaws.com"               
+        "${replace(var.eks_oidc_issuer_url, "https://", "")}:sub" = "system:serviceaccount:application-namespace:worker-service-account"
+        "${replace(var.eks_oidc_issuer_url, "https://", "")}:aud" = "sts.amazonaws.com"               
       }, 
         }
       }
@@ -189,8 +201,8 @@ resource "aws_iam_role" "order_iam_role" {
 
         Condition = {
           StringEquals = {
-        "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:sub" = "system:serviceaccount:application-namespace:order-service-service-account"
-        "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:aud" = "sts.amazonaws.com"               
+        "${replace(var.eks_oidc_issuer_url, "https://", "")}:sub" = "system:serviceaccount:application-namespace:order-service-service-account"
+        "${replace(var.eks_oidc_issuer_url, "https://", "")}:aud" = "sts.amazonaws.com"               
       }, 
         }
       }
@@ -241,8 +253,8 @@ resource "aws_iam_role" "shipping_iam_role" {
 
         Condition = {
           StringEquals = {
-        "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:sub" = "system:serviceaccount:application-namespace:shipping-service-service-account"
-        "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:aud" = "sts.amazonaws.com"               
+        "${replace(var.eks_oidc_issuer_url, "https://", "")}:sub" = "system:serviceaccount:application-namespace:shipping-service-service-account"
+        "${replace(var.eks_oidc_issuer_url, "https://", "")}:aud" = "sts.amazonaws.com"               
       }, 
         }
       }
@@ -293,8 +305,8 @@ resource "aws_iam_role" "payment_iam_role" {
 
         Condition = {
           StringEquals = {
-        "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:sub" = "system:serviceaccount:application-namespace:payment-service-service-account"
-        "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:aud" = "sts.amazonaws.com"               
+        "${replace(var.eks_oidc_issuer_url, "https://", "")}:sub" = "system:serviceaccount:application-namespace:payment-service-service-account"
+        "${replace(var.eks_oidc_issuer_url, "https://", "")}:aud" = "sts.amazonaws.com"               
       }, 
         }
       }
@@ -345,8 +357,8 @@ resource "aws_iam_role" "postgres_iam_role" {
 
         Condition = {
           StringEquals = {
-        "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:sub" = "system:serviceaccount:database-ns:postgres-service-account"
-        "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:aud" = "sts.amazonaws.com"               
+        "${replace(var.eks_oidc_issuer_url, "https://", "")}:sub" = "system:serviceaccount:database-ns:postgres-service-account"
+        "${replace(var.eks_oidc_issuer_url, "https://", "")}:aud" = "sts.amazonaws.com"               
       }, 
         }
       }
@@ -398,8 +410,8 @@ resource "aws_iam_role" "database_api_iam_role" {
 
         Condition = {
           StringEquals = {
-        "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:sub" = "system:serviceaccount:application-namespace:dashboard-api-service-account"
-        "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:aud" = "sts.amazonaws.com"               
+        "${replace(var.eks_oidc_issuer_url, "https://", "")}:sub" = "system:serviceaccount:application-namespace:dashboard-api-service-account"
+        "${replace(var.eks_oidc_issuer_url, "https://", "")}:aud" = "sts.amazonaws.com"               
       }, 
         }
       }
@@ -473,8 +485,8 @@ resource "aws_iam_role" "database_service_roles" {
 
       Condition = {
         StringEquals = {
-          "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:sub" = "system:serviceaccount:application-namespace:${each.value}"
-          "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:aud" = "sts.amazonaws.com"
+          "${replace(var.eks_oidc_issuer_url, "https://", "")}:sub" = "system:serviceaccount:application-namespace:${each.value}"
+          "${replace(var.eks_oidc_issuer_url, "https://", "")}:aud" = "sts.amazonaws.com"
         }
       }
     }]
@@ -517,8 +529,8 @@ resource "aws_iam_role" "keda_iam_role" {
 
         Condition = {
           StringEquals = {
-        "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:sub" = "system:serviceaccount:kube-system:keda-operator"
-        "oidc.eks.ap-southeast-1.amazonaws.com/id/507F56E12A4EA46AD10B6AA97B90F722:aud" = "sts.amazonaws.com"               
+        "${replace(var.eks_oidc_issuer_url, "https://", "")}:sub" = "system:serviceaccount:kube-system:keda-operator"
+        "${replace(var.eks_oidc_issuer_url, "https://", "")}:aud" = "sts.amazonaws.com"               
       }, 
         }
       }
