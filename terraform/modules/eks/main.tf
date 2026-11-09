@@ -107,11 +107,16 @@ resource "aws_eks_addon" "pod_identity_agent" {
   ]
 }
 
+resource "aws_eks_access_entry" "github_oidc" {
+  cluster_name      = aws_eks_cluster.eks-cluster.name
+  principal_arn     = "arn:aws:iam::484907514740:role/terraform_aws"
+  type              = "STANDARD"
+}
 
-resource "aws_eks_access_policy_association" "argocd_cluster_admin" {
+resource "aws_eks_access_policy_association" "github_oidc" {
   cluster_name  = aws_eks_cluster.eks-cluster.name
   policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-  principal_arn = "arn:aws:iam::484907514740:role/terraform_aws"
+  principal_arn = aws_eks_access_entry.github_oidc.principal_arn
 
   access_scope {
     type = "cluster"
