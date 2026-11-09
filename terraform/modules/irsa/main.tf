@@ -382,7 +382,7 @@ data "aws_iam_policy_document" "postgres_iam_policy_document" {
     ]
 
     
-    resources = ["arn:aws:secretsmanager:ap-southeast-1:484907514740:secret:eks/postgres-M1JfQr"]
+    resources = ["arn:aws:secretsmanager:ap-southeast-1:484907514740:secret:eks/postgres"]
   }
 
 }
