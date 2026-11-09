@@ -435,7 +435,7 @@ data "aws_iam_policy_document" "aws_secret_iam_policy_document" {
     ]
 
     
-    resources = ["arn:aws:secretsmanager:ap-southeast-1:484907514740:secret:database_url-4hCZDH"]
+    resources = ["arn:aws:secretsmanager:ap-southeast-1:484907514740:secret:database_url"]
   }
 
 }
