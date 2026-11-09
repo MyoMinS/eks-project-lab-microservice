@@ -36,7 +36,7 @@ spec:
       containers:
         - name: inventory-service
           image: >-
-            484907514740.dkr.ecr.ap-southeast-1.amazonaws.com/inventory-service:b07360865d30961eeedfdbdbe6d79802de2f5051-4
+            484907514740.dkr.ecr.ap-southeast-1.amazonaws.com/inventory-service:2cc1fdca203fb84b238b6a6215b88189c7d80481-9
           imagePullPolicy: Always
           securityContext:
             runAsNonRoot: true
