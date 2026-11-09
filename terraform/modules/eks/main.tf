@@ -4,7 +4,7 @@ resource "aws_eks_cluster" "eks-cluster" {
   name     = "eks-cluster"
   #role_arn = var.aws_iam_role_eks_role
   role_arn = var.eks_role_arn
-  version  = "1.35"
+  version  = "1.37"
 
   #enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 
@@ -105,4 +105,15 @@ resource "aws_eks_addon" "pod_identity_agent" {
   depends_on = [
     aws_eks_node_group.eks-node-group
   ]
+}
+
+
+resource "aws_eks_access_policy_association" "argocd_cluster_admin" {
+  cluster_name  = aws_eks_cluster.eks-cluster.name
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+  principal_arn = "arn:aws:iam::484907514740:role/terraform_aws"
+
+  access_scope {
+    type = "cluster"
+  }
 }
