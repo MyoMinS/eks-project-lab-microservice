@@ -6,17 +6,17 @@ metadata:
 spec:
   acme:
     server: "https://acme-v02.api.letsencrypt.org/directory"
-    email: "zakariyaa4458@gmail.com"
+    email: "myominsoe432@gmail.com"
     privateKeySecretRef:
       name: issuer
     solvers:
     - dns01:
         route53:
-          hostedZoneID: Z101674438AEID6T19NFK
-          region: eu-west-2
+          hostedZoneID: Z02287051Q3S7J1YFEGVB
+          region: ap-southeast-1
       selector:
         dnsZones:
-        - "ecommerce.zakariyaalab.com"
+        - "myomins.website"
     - http01:
         ingress:
           class: traefik
